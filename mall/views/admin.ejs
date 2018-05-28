@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<meta charset='utf-8'>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<script src="/javascripts/jquery-3.3.1.min.js"></script>
+	<script>
+	$(function(){
+		$("#btnLogin").click(
+			function(){
+				if($("id").val() == "") {
+					alert("아이디를 꼭 입력하세요.");
+					$("#id").focus();
+					return ;
+				}
+				if($("#passwd").val() == "") {
+					alert("비밀번호를 꼭 입력하세요.");
+					$("#passwd").focus();
+					return ;
+				}
+				$("#admin").submit();
+			});
+	});
+</script>
+</head>
+
+<body>
+	<h1><%= title %></h1>
+	<form id="admin" action="/admin" method="post">
+		<table>
+			<tr>
+				<th>아이디</th>
+				<td><input type="text" name="id" id="id" size="12" maxLength="12"></td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td><input type="password" name="passwd" id="passwd" size="12" maxLength="12"></td>
+			</tr>
+				<tr>
+					<td colspan="2">
+						<input type="button" id="btnLogin" name="login" value="로그인">
+						<input type="reset" id="btnCancel"name="cancel" value="취소">
+					</td>
+				</tr>
+			</table>
+		</form>
+
+</body>
+</html>
