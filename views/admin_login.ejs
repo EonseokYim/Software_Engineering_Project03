@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/javascripts/jquery-3.3.1.min.js"></script>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <form action="/admin/login" method="post" onsubmit="return onLoginSubmit()">
+	<table boreder="1">
+		<tr>
+			<td>아이디</td>
+			<td><input type="text" name="user_id" id="user_id" required/></td>
+		</tr>
+		<tr>
+			<td>비밀번호</td>
+			<td><input type="password" name="user_pw" id="user_pw" required/></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<button type="submit">로그인</button>
+			</td>
+		</tr>
+	</table>
+</form>
+
+<script>
+    function onLoginSubmit() {
+      if ( $("#user_id").val().trim() == "" ) {
+        var message = "아이디를 입력해 주세요";
+        $("#user_id").val("");
+        $("#user_id").focus();
+        alert(message);
+        return false;
+      }
+      if ( $("#user_pw").val().trim() == "" ) {
+        var message = "비밀번호를 입력해 주세요.";
+        $("#user_pw").val("");
+        $("#user_pw").focus();
+        alert(message);
+        return false;
+      }
+    }
+  </script>
+
+
+
+
+
+  </body>
+</html>
