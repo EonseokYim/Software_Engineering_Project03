@@ -11,12 +11,11 @@ var pool = mysql.createPool({
   password: '1234123409Eon'
 });
 
-/* GET home page. */
+/* GET /admin/login */
 router.get('/login', function(req, res, next) {
   res.render('admin_login', { title: 'Administrator Login' });
 });
-
-
+/* POST /admin/login */
 router.post('/login', function(req, res, next) {
   var user_id = req.body.user_id;
   var user_pw = req.body.user_pw;
@@ -39,10 +38,15 @@ router.post('/login', function(req, res, next) {
         });
       });
     });
-
     router.get('/main', function(req, res, next) {
       res.render('admin_main', { title: 'Administrator Main' });
     });
+
+/* GET /admin/login */
+router.get('/addItem', function(req, res, next) {
+      res.render('admin_addItem', { title: 'Administrator addItem' });
+});
+
 
 
 module.exports = router;
