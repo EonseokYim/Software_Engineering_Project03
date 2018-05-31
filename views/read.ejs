@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="/javascripts/jquery-3.3.1.min.js"></script>
+	<title><%= title %></title>
+	<link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+
+<body>
+	<h1><%= title %></h1>
+
+<form action="/admin/update" method="get">
+  <table border="1">
+    <input type="hidden" name="item_idx" value="<%=row.item_idx%>"/>
+    <tr>
+      <td>제품명</td>
+			<td><%=row.item_name%></td>
+		</tr>
+		<tr>
+			<td>제품가격</td>
+			<td><%=row.item_price%></td>
+		</tr>
+    <tr>
+			<td>현재 재고</td>
+			<td><%=row.item_stock%></td>
+		</tr>
+    <tr>
+			<td>제품 브랜드</td>
+			<td><%=row.item_brand%></td>
+		</tr>
+    <tr>
+			<td>제품 상세설명</td>
+			<td><%=row.item_content%></td>
+		</tr>
+    <tr>
+			<td>제품 카테고리</td>
+			<td><%=row.item_category%></td>
+		</tr>
+    <tr>
+			<td>조회수</td>
+			<td><%=row.item_hit%></td>
+		</tr>
+    <tr>
+			<td>구매수</td>
+			<td><%=row.item_accum_sell%></td>
+		</tr>
+		<tr>
+			<td>이미지</td>
+			<td><img src="/image/<%=row.item_image%>"</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<button type="submit">제품 수정/삭제</button>
+				<a href="/admin/list">리스트로 돌아가기</a>
+			</td>
+		</tr>
+	</table>
+</form>
+
+</body>
+</html>

@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
+app.use('/image', express.static('upload')); //실제 upload폴더를 가상의 image에서 접근가능.
 
 
 // catch 404 and forward to error handler

@@ -7,5 +7,86 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+
+
+    <form action="/admin/addItem" method="post" onsubmit="return onItemSubmit()" enctype="multipart/form-data">
+    	<table boreder="1">
+    		<tr>
+    			<td>제품명</td>
+    			<td><input type="text" name="item_name" id="item_name" required/></td>
+    		</tr>
+    		<tr>
+    			<td>제품가격</td>
+    			<td><input type="text" name="item_price" id="item_price" required/></td>
+    		</tr>
+    		<tr>
+    			<td>제품 재고량</td>
+          <td><input type="text" name="item_stock" id="item_stock" required/></td>
+    		</tr>
+    		<tr>
+    			<td>제품 브랜드</td>
+          <td><input type="text" name="item_brand" id="item_brand"></td>
+    		</tr>
+    		<tr>
+    			<td>제품 설명</td>
+          <td><textarea name="item_content" id="item_content" cols="30" rows="10" required></textarea></td>
+    		</tr>
+        <tr>
+    			<td>제품 카테고리</td>
+          <td><input type="text" name="item_category" id="item_category" required/></td>
+    		</tr>
+        <tr>
+    			<td>제품 사진 업로드</td>
+          <td><input type="file" name="imgFile"></td>
+    		</tr>
+    		<tr>
+    			<td colspan="2">
+    				<button type="submit">등록하기</button>
+    			</td>
+    		</tr>
+    	</table>
+    </form>
+
+    <script>
+    	function onItemSubmit() {
+    		if ( $("#item_name").val().trim() == "" ) {
+    			var message = "제품명을 입력해 주세요.";
+    			$("#item_name").val("");
+    			$("#item_name").focus();
+    			alert(message);
+    			return false;
+    		}
+    		if ( $("#item_price").val().trim() == "" ) {
+    			var message = "제품 가격을 입력해 주세요.";
+    			$("#item_price").val("");
+    			$("#item_price").focus();
+    			alert(message);
+    			return false;
+    		}
+    		if ( $("#item_stock").val().trim() == "" ) {
+    			var message = "현재 제품의 재고량을 입력해 주세요.";
+          $("#item_stock").val("");
+          $("#item_stock").focus();
+          alert(message);
+          return false;
+    		}
+        if ( $("#item_content").val().trim() == "" ) {
+    			var message = "제품의 설명을 입력해 주세요.";
+          $("#item_content").val("");
+          $("#item_content").focus();
+          alert(message);
+          return false;
+    		}
+        if ( $("#item_category").val().trim() == "" ) {
+    			var message = "제품의 설명을 입력해 주세요.";
+          $("#item_category").val("");
+          $("#item_category").focus();
+          alert(message);
+          return false;
+    		}
+    	}
+      </script>
+
+
   </body>
 </html>
