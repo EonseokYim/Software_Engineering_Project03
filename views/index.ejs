@@ -1,22 +1,81 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <br />
-    <br />
-    <br />
-    <br />
-    <a href="/shopping">쇼핑몰 이동</a>
-    <br />
-    <br />
-    <a href="/admin/login">관리자 이동</a>
-    <br />
 
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= title %>
+    </title>
+    <!-- Fontfaces CSS-->
+    <link href="css/font-face.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <!-- Bootstrap CSS-->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!-- Custom styles for this template -->
+    <link href="css/starter-template.css" rel="stylesheet">
+    <link href="css/login-modal.css" rel="stylesheet">
+    <title>
+        <%= title %>
+    </title>
+</head>
 
-  </body>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- 브라우저가 좁아졋을때 나오는 버튼(클릭시 메뉴출력) -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">관리자 페이지</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li>">홈</a>
+                    </li>
+                    <li><a href="#"> </a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#login-modal">관리자 로그인하기</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="loginmodal-container">
+                <h1>Login to Your Account</h1>
+                <br>
+                <form action="/admin/login" method="post" onsubmit="return onLoginSubmit()">
+                    <input type="text" name="user_id" placeholder="Username" required/>
+                    <input type="password" name="user_pw" placeholder="Password" required/>
+                    <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+    function onLoginSubmit() {
+        if ($("#user_id").val().trim() == "") {
+            var message = "아이디를 입력해 주세요";
+            $("#user_id").val("");
+            $("#user_id").focus();
+            alert(message);
+            return false;
+        }
+        if ($("#user_pw").val().trim() == "") {
+            var message = "비밀번호를 입력해 주세요.";
+            $("#user_pw").val("");
+            $("#user_pw").focus();
+            alert(message);
+            return false;
+        }
+    }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+
 </html>

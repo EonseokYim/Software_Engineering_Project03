@@ -1,32 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <br />
-    <br />
-    <br />
-    <br />
-    <a href="/">메인으로 이동</a>
-    <br />
-    <br />
-    <a href="/admin/addItem">물품 추가</a>
-    <br />
-    <br />
-    <a href="/admin/list">물품 리스트</a>
-    <br />
-    <br />
-    <a href="/admin/buyProduct">구매 현황</a>
-    <br />
-    <br />
-    <a href="/admin/income">매출 현황</a>
-    <br />
-    <br />
-    <a href="/admin/questions">질문 & 답변</a>
 
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= title %>
+    </title>
+    <!-- Fontfaces CSS-->
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <!-- Bootstrap CSS-->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!-- Custom styles for this template -->
+    <link href="/css/starter-template.css" rel="stylesheet">
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- 브라우저가 좁아졋을때 나오는 버튼(클릭시 메뉴출력) -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">관리자화면</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"> <a href="/admin/main">메인</a></li>
+                    <li><a href="/admin/addItem">물품 추가</a></li>
+                    <li><a href="/admin/list">물품 관리</a></li>
+                    <li><a href="/admin/buyProduct">구매 현황</a></li>
+                    <li><a href="/admin/income">매출 현황</a></li>
+                    <li><a href="/admin/stat">통계</a></li>
+                    <li><a href="/admin/questions">질문 & 답변</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+
 </html>

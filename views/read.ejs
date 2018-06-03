@@ -1,61 +1,141 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<script src="/javascripts/jquery-3.3.1.min.js"></script>
-	<title><%= title %></title>
-	<link rel='stylesheet' href='/stylesheets/style.css'/>
+    <meta charset="UTF-8">
+    <!-- Fontfaces CSS-->
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- Vendor CSS-->
+    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link href="/css/theme.css" rel="stylesheet" media="all">
+    <title>
+        <%= title %>
+    </title>
 </head>
 
 <body>
-	<h1><%= title %></h1>
-
-<form action="/admin/update" method="get">
-  <table border="1">
-    <input type="hidden" name="item_idx" value="<%=row.item_idx%>"/>
-    <tr>
-      <td>제품명</td>
-			<td><%=row.item_name%></td>
-		</tr>
-		<tr>
-			<td>제품가격</td>
-			<td><%=row.item_price%></td>
-		</tr>
-    <tr>
-			<td>현재 재고</td>
-			<td><%=row.item_stock%></td>
-		</tr>
-    <tr>
-			<td>제품 브랜드</td>
-			<td><%=row.item_brand%></td>
-		</tr>
-    <tr>
-			<td>제품 상세설명</td>
-			<td><%=row.item_content%></td>
-		</tr>
-    <tr>
-			<td>제품 카테고리</td>
-			<td><%=row.item_category%></td>
-		</tr>
-    <tr>
-			<td>조회수</td>
-			<td><%=row.item_hit%></td>
-		</tr>
-    <tr>
-			<td>구매수</td>
-			<td><%=row.item_accum_sell%></td>
-		</tr>
-		<tr>
-			<td>이미지</td>
-			<td><img src="/image/<%=row.item_image%>"</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<button type="submit">제품 수정/삭제</button>
-				<a href="/admin/list">리스트로 돌아가기</a>
-			</td>
-		</tr>
-	</table>
-</form>
-
+    <h1><%= title %></h1>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- 브라우저가 좁아졋을때 나오는 버튼(클릭시 메뉴출력) -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">관리자화면</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li> <a href="/admin/main">메인</a></li>
+                    <li><a href="/admin/addItem">물품 추가</a></li>
+                    <li class="active"><a href="/admin/list">물품 관리</a></li>
+                    <li><a href="/admin/buyProduct">구매 현황</a></li>
+                    <li><a href="/admin/income">매출 현황</a></li>
+                    <li><a href="/admin/stat">통계</a></li>
+                    <li><a href="/admin/questions">질문 & 답변</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="collapse navbar-collapse">
+                                <h2 class="title-1 m-b-25">Item List</h2>
+                            </div>
+                            <div class="table-responsive table--no-card m-b-40">
+                                <table class="table table-borderless table-striped table-earning">
+                                    <tbody>
+                                        <form action="/admin/update" method="get">
+                                            <input type="hidden" name="item_idx" value="<%=row.item_idx%>" />
+                                            <tr>
+                                                <th>제품명</th>
+                                                <th>
+                                                    <%=row.item_name%>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>제품가격</th>
+                                                <th>
+                                                    <%=row.item_price%>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>현재 재고</th>
+                                                <th>
+                                                    <%=row.item_stock%>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>제품 브랜드</th>
+                                                <th>
+                                                    <%=row.item_brand%>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>제품 상세설명</th>
+                                                <th>
+                                                    <%=row.item_content%>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>제품 카테고리</th>
+                                                <th>
+                                                    <%=row.item_category%>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>조회수</th>
+                                                <th>
+                                                    <%=row.item_hit%>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>구매수</th>
+                                                <th>
+                                                    <%=row.item_accum_sell%>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>이미지</th>
+                                                <th><img src="/image/<%=row.item_image%>" </th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan=2>
+                                                    <button type="submit" class="au-btn au-btn-icon au-btn--blue">
+                                                        상품 수정/삭제</button>
+                                                </td>
+                                    </tbody>
+                                </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </body>
+
 </html>

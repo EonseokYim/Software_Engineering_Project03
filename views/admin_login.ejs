@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
+  	<meta charset="UTF-8">
     <script src="/javascripts/jquery-3.3.1.min.js"></script>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="/css/login-modal.css" rel="stylesheet" media="all">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+	<h1><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></h1>
 
-    <form action="/admin/login" method="post" onsubmit="return onLoginSubmit()">
-	<table boreder="1">
-		<tr>
-			<td>아이디</td>
-			<td><input type="text" name="user_id" id="user_id" required/></td>
-		</tr>
-		<tr>
-			<td>비밀번호</td>
-			<td><input type="password" name="user_pw" id="user_pw" required/></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<button type="submit">로그인</button>
-			</td>
-		</tr>
-	</table>
-</form>
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	  <div class="modal-dialog">
+				<div class="loginmodal-container">
+					<h1>Login to Your Account</h1><br>
+				  <form action="/admin/login" method="post" onsubmit="return onLoginSubmit()">
+					<input type="text" name="user_id" placeholder="Username" required/>
+					<input type="password" name="user_pw" placeholder="Password" required/>
+					<input type="submit" name="login" class="login loginmodal-submit" value="Login">
+				  </form>
 
+				  <div class="login-help">
+					<a href="#">Register</a> - <a href="#">Forgot Password</a>
+				  </div>
+				</div>
+			</div>
+		  </div>
 <script>
     function onLoginSubmit() {
       if ( $("#user_id").val().trim() == "" ) {

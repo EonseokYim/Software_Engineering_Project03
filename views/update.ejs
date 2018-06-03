@@ -1,134 +1,211 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Fontfaces CSS-->
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- Vendor CSS-->
+    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link href="/css/theme.css" rel="stylesheet" media="all">
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-
-
-    <form action="/admin/update" method="post" onsubmit="return onItemSubmit()" enctype="multipart/form-data">
-    	<table boreder="1">
-        <input type="hidden" name="item_idx" value="<%=row.item_idx%>"/>
-    		<tr>
-    			<td>제품명</td>
-    			<td><input type="text" name="item_name" id="item_name" required/></td>
-    		</tr>
-    		<tr>
-    			<td>제품가격</td>
-    			<td><input type="text" name="item_price" id="item_price" required/></td>
-    		</tr>
-    		<tr>
-    			<td>제품 재고량</td>
-          <td><input type="text" name="item_stock" id="item_stock" required/></td>
-    		</tr>
-    		<tr>
-    			<td>제품 브랜드</td>
-          <td><input type="text" name="item_brand" id="item_brand"></td>
-    		</tr>
-    		<tr>
-    			<td>제품 설명</td>
-          <td><textarea name="item_content" id="item_content" cols="30" rows="10" required></textarea></td>
-    		</tr>
-        <tr>
-    			<td>제품 카테고리</td>
-          <td><input type="text" name="item_category" id="item_category" required/></td>
-    		</tr>
-        <tr>
-    			<td>제품 사진 업로드</td>
-          <td><input type="file" name="imgFile"></td>
-    		</tr>
-    		<tr>
-    			<td colspan="2">
-    				<button type="submit">수정하기</button>
-    			</td>
-    		</tr>
-    	</table>
-    </form>
-
-
-
-  <br />
-
-  <td>**제품을 삭제하려면 아래에 칸에 관리자 ID와 비밀번호를 입력하고 '삭제하기'를 눌려주세요</td>
-  <form action="/admin/delete" method="post" onsubmit="return onDeleteSubmit()">
-    <table border="1">
-      <input type="hidden" name="item_idx" value="<%=row.item_idx%>"/>
-      <tr>
-          <td>아이디</td>
-          <td><input type="text" name="user_id" id="user_id" required/></td>
-        </tr>
-      <tr>
-        <td>패스워드</td>
-        <td><input type="password" name="user_pw" id="user_pw" required/></td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <button type="submit">삭제하기</button>
-        </td>
-      </tr>
-    </table>
-  </form>
-
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- 브라우저가 좁아졋을때 나오는 버튼(클릭시 메뉴출력) -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">관리자화면</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li> <a href="/admin/main">메인</a></li>
+                    <li><a href="/admin/addItem">물품 추가</a></li>
+                    <li class="active"><a href="/admin/list">물품 관리</a></li>
+                    <li><a href="/admin/buyProduct">구매 현황</a></li>
+                    <li><a href="/admin/income">매출 현황</a></li>
+                    <li><a href="/admin/stat">통계</a></li>
+                    <li><a href="/admin/questions">질문 & 답변</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="collapse navbar-collapse">
+                                <h2 class="title-1 m-b-25">Item List</h2>
+                            </div>
+                            <div class="table-responsive table--no-card m-b-40">
+                                <table class="table table-borderless table-striped table-earning">
+                                    <tbody>
+                                        <form action="/admin/update" method="post" onsubmit="return onItemSubmit()" enctype="multipart/form-data">
+                                            <input type="hidden" name="item_idx" value="<%=row.item_idx%>" />
+                                            <tr>
+                                                <th>제품명</th>
+                                                <th>
+                                                    <input type="text" name="item_name" id="item_name" value = "<%=row.item_name%>"required/>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>제품가격</th>
+                                                <th>
+                                                    <input type="text" name="item_price" id="item_price" value = "<%=row.item_price%>" required/>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>제품 재고량</th>
+                                                <th>
+                                                    <input type="text" name="item_stock" id="item_stock" value = "<%=row.item_stock%>"required/>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>제품 브랜드</th>
+                                                <th>
+                                                    <input type="text" name="item_brand" id="item_brand" value = "<%=row.item_brand%>">
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>제품 설명</th>
+                                                <th>
+                                                    <textarea name="item_content" id="item_content" cols="30" rows="10" required><%=row.item_name%></textarea>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>제품 카테고리</th>
+                                                <th>
+                                                    <input type="text" name="item_category" id="item_category" value = "<%=row.item_category%>"required/>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>제품 사진 업로드</th>
+                                                <th>
+                                                    <input type="file" name="imgFile">
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">
+                                                     <button type = "submit" class="au-btn au-btn-icon au-btn--blue">수정하기</button>
+                                                </th>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </br>
+                                <table class="table table-borderless table-striped table-earning">
+                                    </form>
+                                    <tr><td colspan="2">**제품을 삭제하려면 아래에 칸에 관리자 ID와 비밀번호를 입력하고 '삭제하기'를 눌려주세요</td></tr>
+                                    <form action="/admin/delete" method="post" onsubmit="return onDeleteSubmit()">
+                                            <input type="hidden" name="item_idx" value="<%=row.item_idx%>" />
+                                            <tr>
+                                                <th>아이디</th>
+                                                <th>
+                                                    <input type="text" name="user_id" id="user_id" required/>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>패스워드</th>
+                                                <th>
+                                                    <input type="password" name="user_pw" id="user_pw" required/>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">
+                                                     <button type = "submit" class="au-btn au-btn-icon au-btn--blue">
+                                    삭제하기</button>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
     <script>
-    	function onItemSubmit() {
-    		if ( $("#item_name").val().trim() == "" ) {
-    			var message = "제품명을 입력해 주세요.";
-    			$("#item_name").val("");
-    			$("#item_name").focus();
-    			alert(message);
-    			return false;
-    		}
-    		if ( $("#item_price").val().trim() == "" ) {
-    			var message = "제품 가격을 입력해 주세요.";
-    			$("#item_price").val("");
-    			$("#item_price").focus();
-    			alert(message);
-    			return false;
-    		}
-    		if ( $("#item_stock").val().trim() == "" ) {
-    			var message = "현재 제품의 재고량을 입력해 주세요.";
-          $("#item_stock").val("");
-          $("#item_stock").focus();
-          alert(message);
-          return false;
-    		}
-        if ( $("#item_content").val().trim() == "" ) {
-    			var message = "제품의 설명을 입력해 주세요.";
-          $("#item_content").val("");
-          $("#item_content").focus();
-          alert(message);
-          return false;
-    		}
-        if ( $("#item_category").val().trim() == "" ) {
-    			var message = "제품의 설명을 입력해 주세요.";
-          $("#item_category").val("");
-          $("#item_category").focus();
-          alert(message);
-          return false;
-    		}
-    	}
-
-      function onDeleteSubmit() {
-      if ( $("#user_id").val().trim() == "" ) {
-        var message = "관리자의 ID를 입력해 주세요.";
-        $("#user_id").val("");
-        $("#user_id").focus();
-        alert(message);
-        return false;
-      }
-      if ( $("#user_pw").val().trim() == "" ) {
-          var message = "관리자의 비밀번호를 입력해주세요.";
-          $("#user_pw").val("");
-          $("#user_pw").focus();
-          alert(message);
-          return false;
+    function onItemSubmit() {
+        if ($("#item_name").val().trim() == "") {
+            var message = "제품명을 입력해 주세요.";
+            $("#item_name").val("");
+            $("#item_name").focus();
+            alert(message);
+            return false;
         }
-      }
-      </script>
+        if ($("#item_price").val().trim() == "") {
+            var message = "제품 가격을 입력해 주세요.";
+            $("#item_price").val("");
+            $("#item_price").focus();
+            alert(message);
+            return false;
+        }
+        if ($("#item_stock").val().trim() == "") {
+            var message = "현재 제품의 재고량을 입력해 주세요.";
+            $("#item_stock").val("");
+            $("#item_stock").focus();
+            alert(message);
+            return false;
+        }
+        if ($("#item_content").val().trim() == "") {
+            var message = "제품의 설명을 입력해 주세요.";
+            $("#item_content").val("");
+            $("#item_content").focus();
+            alert(message);
+            return false;
+        }
+        if ($("#item_category").val().trim() == "") {
+            var message = "제품의 설명을 입력해 주세요.";
+            $("#item_category").val("");
+            $("#item_category").focus();
+            alert(message);
+            return false;
+        }
+    }
 
+    function onDeleteSubmit() {
+        if ($("#user_id").val().trim() == "") {
+            var message = "관리자의 ID를 입력해 주세요.";
+            $("#user_id").val("");
+            $("#user_id").focus();
+            alert(message);
+            return false;
+        }
+        if ($("#user_pw").val().trim() == "") {
+            var message = "관리자의 비밀번호를 입력해주세요.";
+            $("#user_pw").val("");
+            $("#user_pw").focus();
+            alert(message);
+            return false;
+        }
+    }
+    </script>
+</body>
 
-  </body>
 </html>
