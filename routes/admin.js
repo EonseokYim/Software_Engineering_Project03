@@ -67,7 +67,7 @@ router.get('/stat', function(req, res, next) {
 })
 
 //글쓰기 로직 처리 post + 이미지 업로드 처리
-router.post('/addItem', upload.array("imgFile", 2), function(req,res){
+router.post('/addItem', upload.array("imgFile", 4), function(req,res){
   var item_name = req.body.item_name;
   var item_price = req.body.item_price;
   var item_stock = req.body.item_stock;
@@ -85,22 +85,30 @@ router.post('/addItem', upload.array("imgFile", 2), function(req,res){
   if(Array.isArray(file)) {
      console.log("배열에 들어 있는 파일 갯수 : %d", file.length);
   }
+  datas = [item_name,item_price,item_stock,item_brand,item_content,item_category];
   for (var index =0; index < file.length; index++) {
      originalname = file[index].originalname;
      filename = file[index].filename;
      mimetype = file[index].mimetype;
      size = file[index].size;
+     datas.push(file[index].originalname);
      console.log('현재 파일 정보 : ' + originalname + ',' + filename);
   }
-    datas = [item_name,item_price,item_stock,item_brand,item_content,item_category,file[1].originalname,file[0].originalname];
+  for (var index=file.length; index<4; index++)
+    datas.push(0);
+
+  
   pool.getConnection(function (err, connection) {
      console.log('get connection');
-    var sql = "insert into item_table(item_name,item_price,item_stock,item_brand,item_content,item_category,item_image,item_detail_image) values(?,?,?,?,?,?,?,?)";
+    var sql = "insert into item_table(item_name,item_price,item_stock,item_brand,item_content,item_category,item_image,item_detail_image,item_detail_image2,item_detail_image3) values(?,?,?,?,?,?,?,?,?,?)";
     connection.query(sql,datas,function(err,rows) {
       if (err) console.error("err : " + err);
       else {
         console.log("ADD NEW ITEM in MySQL using ADMIN accountL");
-        res.redirect('/admin/main');
+        
+        res.send("<script>alert('성공적으로 제품을 업로드하였습니다.');location.href='/admin/addItem';</script>");
+
+        //res.redirect('/admin/main');
       }
       connection.release();
     });
@@ -131,7 +139,7 @@ router.get('/read/:item_idx', function(req,res,next) {
   var item_idx = req.params.item_idx;
 
   pool.getConnection(function(err,connection) {
-    var sql = "select item_idx, item_name, item_price, item_stock, item_brand, item_content, item_category, item_hit, item_accum_sell, item_image from item_table where item_idx=?";
+    var sql = "select item_idx, item_name, item_price, item_stock, item_brand, item_content, item_category, item_hit, item_accum_sell, item_image, item_detail_image from item_table where item_idx=?";
     connection.query(sql,[item_idx],function(err,row) {
       if(err) console.error(err);
       console.log("1개 제품 조회 결과 확인 : ", row);
@@ -257,5 +265,24 @@ router.post('/delete', function(req,res,next) {
   });
 });
 
+router.get('/buyProduct/:page', function(req,res,next){
+  pool.getConnection(function (err, connection) {
+    //use the connection
+    var sql= "SELECT user_idx, user_stock, item_name, item_category, item_price, item_buy FROM cart_table";
+    connection.query(sql, function (err, rows) {
+      if (err)
+        console.error("err : " + err);
+      console.log("!!!!!ows : " + JSON.stringify(rows));
+
+      res.render('buyProduct', {title: '현재 아이템 리스트', rows:rows});
+      connection.release();
+    });
+  });
+});
+
+router.get('/buyProduct', function(req,res,next) {
+  //all list redirect if connected to board/
+  res.redirect('/admin/buyProduct/1');
+});
 
 module.exports = router;
