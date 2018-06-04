@@ -13,23 +13,18 @@ var pool = mysql.createPool({
 
 //이미지 저장을 위해 필요한 변수들.
 var multer = require("multer");
-let path = require("path");
-let image_name;
-let storage = multer.diskStorage({
+
+var storage = multer.diskStorage({
   destination: function(req, file, callback) {
-    callback(null, "upload/")
+    callback(null, "upload")
   },
   filename: function(req, file, callback) {
-    let extension = path.extname(file.originalname);
-    basename = path.basename(file.originalname, extension);
-    let date = Date.now();
-    callback(null, basename + "-" + date + extension);
-    image_name = basename + "-" + date + extension;
+    callback(null, file.originalname)
   }
 });
 var upload = multer({
-  storage: storage
-})
+  storage: storage,
+});
 
 /* GET /admin/login */
 router.get('/login', function(req, res, next) {
@@ -72,29 +67,35 @@ router.get('/stat', function(req, res, next) {
 })
 
 //글쓰기 로직 처리 post + 이미지 업로드 처리
-router.post('/addItem', upload.single("imgFile"), function(req,res, next){
+router.post('/addItem', upload.array("imgFile", 2), function(req,res){
   var item_name = req.body.item_name;
   var item_price = req.body.item_price;
   var item_stock = req.body.item_stock;
   var item_brand = req.body.item_brand;
   var item_content = req.body.item_content;
   var item_category = req.body.item_category;
-  let file = req.file
+  var file = req.files;
   var datas
 
-  if (file == undefined) { //파일을 업로드 안하는 경우.
-    no_name="0" //파일이 없을때는 0으로 파일명을 설정
-    datas = [item_name,item_price,item_stock,item_brand,item_content,item_category,no_name];
+  var originalname = '',
+  filename = '',
+  mimetype = '',
+  size = 0;
+
+  if(Array.isArray(file)) {
+     console.log("배열에 들어 있는 파일 갯수 : %d", file.length);
   }
-  else { //파일을 업로드하는 경우
-    let result = {
-      originalName : file.originalname,
-      size : file.size,
-    }
-    datas = [item_name,item_price,item_stock,item_brand,item_content,item_category,image_name];
+  for (var index =0; index < file.length; index++) {
+     originalname = file[index].originalname;
+     filename = file[index].filename;
+     mimetype = file[index].mimetype;
+     size = file[index].size;
+     console.log('현재 파일 정보 : ' + originalname + ',' + filename);
   }
+    datas = [item_name,item_price,item_stock,item_brand,item_content,item_category,file[1].originalname,file[0].originalname];
   pool.getConnection(function (err, connection) {
-    var sql = "insert into item_table(item_name,item_price,item_stock,item_brand,item_content,item_category,item_image) values(?,?,?,?,?,?,?)";
+     console.log('get connection');
+    var sql = "insert into item_table(item_name,item_price,item_stock,item_brand,item_content,item_category,item_image,item_detail_image) values(?,?,?,?,?,?,?,?)";
     connection.query(sql,datas,function(err,rows) {
       if (err) console.error("err : " + err);
       else {
