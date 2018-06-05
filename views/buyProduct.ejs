@@ -106,10 +106,10 @@
                                                     <%=oneItem.item_category%>
                                                 </td>
                                                 <td>
-                                                    <%=oneItem.item_price%>
+                                                    <%=(oneItem.item_price).toLocaleString()%>
                                                 </td>
                                                 <td>
-                                                    <%=oneItem.item_price * oneItem.user_stock %>
+                                                    <%=(oneItem.item_price * oneItem.user_stock).toLocaleString() %>
                                                 </td>
                                                 <td>
                                                     <% if (oneItem.item_buy==1) { %>

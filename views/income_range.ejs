@@ -63,66 +63,97 @@
                             </div>
                         </div>
                     </div>
-
+                    <%
+                    var currentdate = new Date();
+                    var datetime = "Last Sync: "
+                    + currentdate.getDate() + "/"
+                    + (currentdate.getMonth()+1)  + "/" 
+                    + currentdate.getFullYear() + " @ "  
+                    + currentdate.getHours() + ":"  
+                    + currentdate.getMinutes() + ":" 
+                    + currentdate.getSeconds(); 
+                    %>   
                     
-
+                    <br/>
+                    <p> 범위 날짜에 검색된 매출 결과입니다. (<a href="/admin/income">뒤로가기</a>)</p>
 
                     <div class="table-responsive table--no-card m-b-40">
                         <table class="table table-borderless table-striped table-earning">
                             <thead>
-                                <tr>
-                                    <th>날짜.시간</th>
-                                    <th>회원번호</th>
-                                    <th>수량</th>
-                                    <th>제품명</th>
-                                    <th>카테고리</th>
-                                    <th>제품가격(개당)</th>
-                                    <th>총 결제 가격</th>
-                                    <th>상태</th>
-                                </tr>
-                            </thead>
-                            <tbody>
 
-                                <% for(var i=0; i<rows.length; i++) { %>
-                                <%  var oneItem = rows[i];  %>
-                                <%  var year = oneItem.item_date.getFullYear(); %>
-                                <%  var month = oneItem.item_date.getMonth()+1; %>
-                                <%  var date = oneItem.item_date.getDate(); %>
-                                <%  var hour = oneItem.item_date.getHours(); %>
-                                <%  var minute = oneItem.item_date.getMinutes(); %>
-                                <% if(oneItem.item_buy==1) { %>
-                                <tr>
-                                   <td>
-                                      <%=year%>-<%=month%>-<%=date%>  <%=hour%>:<%=minute%>
-                                  </td>
-                                  <td>
-                                    <%=oneItem.user_idx%>
-                                </td>
-                                <td>
-                                    <%=oneItem.user_stock%>
-                                </td>
-                                <td>
-                                    <%=oneItem.item_name%>
-                                </td>
-                                <td>
-                                    <%=oneItem.item_category%>
-                                </td>
-                                <td>
-                                    <%=oneItem.item_price%>
-                                </td>
-                                <td>
-                                    <%=oneItem.item_price * oneItem.user_stock %>
-                                </td>
-                                <td>
-                                    <% if (oneItem.item_buy==1) { %>
-                                    결제완료
-                                    <% } %>
-                                </td>
+
+                               <tr>
+                                <th>번호</th>
+                                <th>날짜.시간</th>
+                                <th>회원번호</th>
+                                <th>수량</th>
+                                <th>제품명</th>
+                                <th>카테고리</th>
+                                <th>제품가격(개당)</th>
+                                <th>총 결제 가격</th>
+                                <th>상태</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                            var all_total = 0;
+                            var count = 0;
+
+                            for(i=0; i<rows.length; i++) { 
+                            var oneItem = rows[i]; 
+                            var year = oneItem.item_date.getFullYear();
+                            var month = oneItem.item_date.getMonth()+1;
+                            var date = oneItem.item_date.getDate();
+                            var hour = oneItem.item_date.getHours();
+                            var minute = oneItem.item_date.getMinutes();
+                            if(oneItem.item_buy==1) {
+                                count++
+                            %>
+
+                            <tr>
+                                <td><%=count%></td>
+                             <td>
+                              <%=year%>-<%=month%>-<%=date%>  <%=hour%>:<%=minute%>
+                          </td>
+                          <td>
+                            <%=oneItem.user_idx%>
+                        </td>
+                        <td>
+                            <%=oneItem.user_stock%>
+                        </td>
+                        <td>
+                            <%=oneItem.item_name%>
+                        </td>
+                        <td>
+                            <%=oneItem.item_category%>
+                        </td>
+                        <td>
+                            <%=(oneItem.item_price).toLocaleString()%>
+                        </td>
+                        <td>
+                            <%
+                            var total_price = oneItem.item_price * oneItem.user_stock
+                            all_total += total_price
+                            %>
+
+                            <%=(total_price).toLocaleString() %>
+                        </td>
+                        <td>
+                            <% if (oneItem.item_buy==1) { %>
+                            결제완료
                             <% } %>
-                            <% } %>
-                        </tbody>
-                    </table>
+                        </td>
+                    </tr>
+                    <% } %>
+                    <% } %>
+                </tbody>
+            </table>
+
+            <p> <%= only_date %> ~ <%= only_date_a %> 사이에 검색된 제품은 총 <%= count %>개 입니다.</p>
+            <p> 날짜 범위의 총 매출은 <%= (all_total).toLocaleString() %>입니다. </p>
+                <br/>
+            <p> <%= datetime %> </p>
+
                 </div>
             </div>
         </div>
