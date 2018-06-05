@@ -46,7 +46,6 @@
                     <li><a href="/admin/list">물품 관리</a></li>
                     <li class="active"><a href="/admin/buyProduct">구매 현황</a></li>
                     <li><a href="/admin/income">매출 현황</a></li>
-                    <li><a href="/admin/stat">통계</a></li>
                     <li><a href="/admin/questions">질문 & 답변</a></li>
                 </ul>
             </div>
@@ -60,7 +59,7 @@
                         <div class="col-lg-12">
                             <div class="overview-wrap">
                                 <h2 class="title-1 m-b-25">구매 현황</h2>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -68,7 +67,8 @@
                         <table class="table table-borderless table-striped table-earning">
                             <thead>
                                 <tr>
-                                    <th>user_idx</th>
+                                    <th>날짜.시간</th>
+                                    <th>회원번호</th>
                                     <th>수량</th>
                                     <th>제품명</th>
                                     <th>카테고리</th>
@@ -76,40 +76,48 @@
                                         <th>제품가격(개당)</th>
                                         <th>총 결제 가격</th>
 
-                                        <th>결제함or장바구니</th>
+                                        <th>상태</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <% for(var i=0; i<rows.length; i++) { %>
-                                    <%  var oneItem = rows[i];  %>
-                                    <tr>
-                                        <td>
-                                            <%=oneItem.user_idx%>
-                                        </td>
-                                        <td>
-                                            <%=oneItem.user_stock%>
-                                        </td>
-                                        <td>
-                                            <a href="/admin/read/<%=oneItem.user_idx%>">
-                                                <%=oneItem.item_name%>
-                                            </a>
-
-                                        </td>
-                                        <td>
-                                            <%=oneItem.item_category%>
-                                        </td>
-                                        <td>
-                                            <%=oneItem.item_price%>
-                                        </td>
-                                        <td>
-                                            <%=oneItem.item_price * oneItem.user_stock %>
-
-                                        </td>
-                                        <td>
-                                            <%=oneItem.item_buy%>
-                                        </td>
-                                    </tr>
+                                        <%  var oneItem = rows[i];  %>
+                                        <%  var year = oneItem.item_date.getFullYear(); %>
+                                        <%  var month = oneItem.item_date.getMonth()+1; %>
+                                        <%  var date = oneItem.item_date.getDate(); %>
+                                        <%  var hour = oneItem.item_date.getHours(); %>
+                                        <%  var minute = oneItem.item_date.getMinutes(); %>
+                                        <% if(oneItem.item_buy==1) { %>
+                                            <tr>
+                                               <td>
+                                                  <%=year%>-<%=month%>-<%=date%>  <%=hour%>:<%=minute%>
+                                               </td>
+                                                <td>
+                                                    <%=oneItem.user_idx%>
+                                                </td>
+                                                <td>
+                                                    <%=oneItem.user_stock%>
+                                                </td>
+                                                <td>
+                                                        <%=oneItem.item_name%>
+                                                </td>
+                                                <td>
+                                                    <%=oneItem.item_category%>
+                                                </td>
+                                                <td>
+                                                    <%=oneItem.item_price%>
+                                                </td>
+                                                <td>
+                                                    <%=oneItem.item_price * oneItem.user_stock %>
+                                                </td>
+                                                <td>
+                                                    <% if (oneItem.item_buy==1) { %>
+                                                        결제완료
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+                                        <% } %>
                                     <% } %>
                                 </tbody>
                             </table>

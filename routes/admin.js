@@ -268,7 +268,7 @@ router.post('/delete', function(req,res,next) {
 router.get('/buyProduct/:page', function(req,res,next){
   pool.getConnection(function (err, connection) {
     //use the connection
-    var sql= "SELECT user_idx, user_stock, item_name, item_category, item_price, item_buy FROM cart_table";
+    var sql= "SELECT user_idx, user_stock, item_name, item_category, item_price, item_buy, item_date FROM cart_table";
     connection.query(sql, function (err, rows) {
       if (err)
         console.error("err : " + err);
@@ -284,5 +284,54 @@ router.get('/buyProduct', function(req,res,next) {
   //all list redirect if connected to board/
   res.redirect('/admin/buyProduct/1');
 });
+
+
+router.get('/income/:page', function(req,res,next){
+  pool.getConnection(function (err, connection) {
+    //use the connection
+    var sql= "SELECT user_idx, user_stock, item_name, item_category, item_price, item_buy, item_date FROM cart_table";
+    connection.query(sql, function (err, rows) {
+      if (err)
+        console.error("err : " + err);
+      console.log("rows : " + JSON.stringify(rows));
+      res.render('income', {title: '매출 현황', rows:rows});
+      connection.release();
+    });
+  });
+});
+
+router.get('/income', function(req,res,next) {
+  //all list redirect if connected to board/
+  res.redirect('/admin/income/1');
+});
+
+router.post('/income/:page', function(req,res,next) {
+  var select_year = req.body.select_year;
+  var select_month = req.body.select_month;
+  var select_day = req.body.select_day;
+  var select_year_a = req.body.select_year_a;
+  var select_month_a = req.body.select_month_a;
+  var select_day_a = req.body.select_day_a;
+
+  var select_date = String(select_year) + "-" + String(select_month) + "-" + String(select_day) + " 00:00:00"
+  var select_date_a = String(select_year_a) + "-" + String(select_month_a) + "-" + String(select_day_a) + " 23:59:59"
+
+  var datas = [select_date,select_date_a];
+  var sql = "select * from cart_table where item_date between ? and ?"
+
+  connection.query(sql, datas, function (err, rows) {
+      if (err)
+        console.error("err : " + err);
+      console.log("날짜지정 range rows : " + JSON.stringify(rows));
+      res.render('/income/income_range', {title: '매출 현황', rows:rows});
+      connection.release();
+    });
+});
+
+/* GET /admin/login */
+router.get('/income_range', function(req, res, next) {
+  res.render('income_range', { title: 'income_range' });
+});
+
 
 module.exports = router;

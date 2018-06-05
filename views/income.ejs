@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Fontfaces CSS-->
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- Vendor CSS-->
+    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link href="/css/theme.css" rel="stylesheet" media="all">
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- 브라우저가 좁아졋을때 나오는 버튼(클릭시 메뉴출력) -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">관리자화면</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li> <a href="/admin/main">메인</a></li>
+                    <li><a href="/admin/addItem">물품 추가</a></li>
+                    <li><a href="/admin/list">물품 관리</a></li>
+                    <li><a href="/admin/buyProduct">구매 현황</a></li>
+                    <li  class="active"><a href="/admin/income">매출 현황</a></li>
+                    <li><a href="/admin/questions">질문 & 답변</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="overview-wrap">
+                                <h2 class="title-1 m-b-25">매출 현황</h2>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <%
+                    var currentdate = new Date();
+                    var datetime = "Last Sync: "
+                    + currentdate.getDate() + "/"
+                    + (currentdate.getMonth()+1)  + "/" 
+                    + currentdate.getFullYear() + " @ "  
+                    + currentdate.getHours() + ":"  
+                    + currentdate.getMinutes() + ":" 
+                    + currentdate.getSeconds(); 
+
+
+                    var currentYear = currentdate.getFullYear()
+                    var currentMonth = currentdate.getMonth()+1
+                    var currentDay = currentdate.getDate()
+
+                    %>
+                    <p> <%= datetime %> </p>
+                    
+
+                    <form action="/admin/income/1" method="post" onsubmit="return onDateSubmit()">
+                        <td>Year:</td>
+                        <td><input type="number" name="select_year" id="select_year" min="1950" max=2100 /></td>
+                        <td>Month:</td>
+                        <td><input type="number" name="select_month" id="select_month" min="1" max=12 /></td>
+                        <td>Day:</td>
+                        <td><input type="number" name="select_day" id="select_day" min="1" max=31 /></td>
+                        <td> ~ </td>
+                        <td>Year:</td>
+                        <td><input type="number" name="select_year_a" id="select_year_a" min="1950" max=2100 /></td>
+                        <td>Month:</td>
+                        <td><input type="number" name="select_month_a" id="select_month_a" min="1" max=12 /></td>
+                        <td>Day:</td>
+                        <td><input type="number" name="select_day_a" id="select_day_a" min="1" max=31 /></td>
+                        <td><button class="my-btn my-btn-icon my-btn--blue" type="submit">확인</button></td>
+                    </form>
+
+
+
+
+                    <div class="table-responsive table--no-card m-b-40">
+                        <table class="table table-borderless table-striped table-earning">
+                            <thead>
+                                <tr>
+                                    <th>날짜.시간</th>
+                                    <th>회원번호</th>
+                                    <th>수량</th>
+                                    <th>제품명</th>
+                                    <th>카테고리</th>
+                                    <th>제품가격(개당)</th>
+                                    <th>총 결제 가격</th>
+                                    <th>상태</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <% for(var i=0; i<rows.length; i++) { %>
+                                <%  var oneItem = rows[i];  %>
+                                <%  var year = oneItem.item_date.getFullYear(); %>
+                                <%  var month = oneItem.item_date.getMonth()+1; %>
+                                <%  var date = oneItem.item_date.getDate(); %>
+                                <%  var hour = oneItem.item_date.getHours(); %>
+                                <%  var minute = oneItem.item_date.getMinutes(); %>
+                                <% if(oneItem.item_buy==1) { %>
+                                <tr>
+                                   <td>
+                                      <%=year%>-<%=month%>-<%=date%>  <%=hour%>:<%=minute%>
+                                  </td>
+                                  <td>
+                                    <%=oneItem.user_idx%>
+                                </td>
+                                <td>
+                                    <%=oneItem.user_stock%>
+                                </td>
+                                <td>
+                                    <%=oneItem.item_name%>
+                                </td>
+                                <td>
+                                    <%=oneItem.item_category%>
+                                </td>
+                                <td>
+                                    <%=oneItem.item_price%>
+                                </td>
+                                <td>
+                                    <%=oneItem.item_price * oneItem.user_stock %>
+                                </td>
+                                <td>
+                                    <% if (oneItem.item_buy==1) { %>
+                                    결제완료
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <% } %>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script>
+    function onDateSubmit() {
+        if ( $("#select_year").val().trim() == "" ) {
+            var message = "year를 입력해주세요.";
+            $("#select_year").val("");
+            $("#select_year").focus();
+            alert(message);
+            return false;
+        }
+        if ( $("#select_month").val().trim() == "" ) {
+            var message = "month를 입력해 주세요.";
+            $("#select_month").val("");
+            $("#select_month").focus();
+            alert(message);
+            return false;
+        }
+        if ( $("#select_day").val().trim() == "" ) {
+            var message = "day를 입력해 주세요.";
+            $("#select_day").val("");
+            $("#select_day").focus();
+            alert(message);
+            return false;
+        }
+
+
+        if ( $("#select_year_a").val().trim() == "" ) {
+            var message = "year를 입력해주세요.";
+            $("#select_year_a").val("");
+            $("#select_year_a").focus();
+            alert(message);
+            return false;
+        }
+        if ( $("#select_month_a").val().trim() == "" ) {
+            var message = "month를 입력해 주세요.";
+            $("#select_month_a").val("");
+            $("#select_month_a").focus();
+            alert(message);
+            return false;
+        }
+        if ( $("#select_day_a").val().trim() == "" ) {
+            var message = "day를 입력해 주세요.";
+            $("#select_day_a").val("");
+            $("#select_day_a").focus();
+            alert(message);
+            return false;
+        }
+  }
+</script>
+
+
+</body>
+
+</html>
