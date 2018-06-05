@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Fontfaces CSS-->
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- Vendor CSS-->
+    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link href="/css/theme.css" rel="stylesheet" media="all">
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- 브라우저가 좁아졋을때 나오는 버튼(클릭시 메뉴출력) -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">관리자화면</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li> <a href="/admin/main">메인</a></li>
+                    <li><a href="/admin/addItem">물품 추가</a></li>
+                    <li class="active"><a href="/admin/list">물품 관리</a></li>
+                    <li><a href="/admin/buyProduct">구매 현황</a></li>
+                    <li><a href="/admin/income">매출 현황</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="overview-wrap">
+                                <h2 class="title-1 m-b-25">Item list</h2>
+                                <button class="au-btn au-btn-icon au-btn--blue">
+                                    <i class="zmdi zmdi-plus"></i><a href="/admin/addItem">add item</a></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive table--no-card m-b-40">
+                        <table class="table table-borderless table-striped table-earning">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>제품명</th>
+                                    <th>제품 카테고리</th>
+                                    <th>가격</th>
+                                    <th>재고</th>
+                                    <!--<th class="text-right">-->
+                                    <th>판매량</th>
+                                    <th>조회수</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i<rows.length; i++) { %>
+                                    <%  var oneItem = rows[i];  %>
+                                        <tr>
+                                            <td>
+                                                <%=oneItem.item_idx%>
+                                            </td>
+                                            <td>
+                                                <a href="/admin/read/<%=oneItem.item_idx%>">
+                                                    <%=oneItem.item_name%>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <%=oneItem.item_category%>
+                                            </td>
+                                            <td>
+                                                <%=oneItem.item_price%>
+                                            </td>
+                                            <td>
+                                                <%=oneItem.item_stock%>
+                                            </td>
+                                            <td>
+                                                <%=oneItem.item_accum_sell%>
+                                            </td>
+                                            <td>
+                                                <%=oneItem.item_hit%>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
