@@ -318,14 +318,18 @@ router.post('/income/:page', function(req,res,next) {
 
   var datas = [select_date,select_date_a];
   var sql = "select * from cart_table where item_date between ? and ?"
-
-  connection.query(sql, datas, function (err, rows) {
+  console.log("\n\n\ntest");
+  
+  pool.getConnection(function (err, connection) {
+    //use the connection
+    connection.query(sql, datas,function (err, rows) {
       if (err)
         console.error("err : " + err);
       console.log("날짜지정 range rows : " + JSON.stringify(rows));
-      res.render('/income/income_range', {title: '매출 현황', rows:rows});
+      //res.render('/income_range', {title: '매출 현황', rows:rows});
       connection.release();
     });
+  });
 });
 
 /* GET /admin/login */

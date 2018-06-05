@@ -64,43 +64,7 @@
                         </div>
                     </div>
 
-                    <%
-                    var currentdate = new Date();
-                    var datetime = "Last Sync: "
-                    + currentdate.getDate() + "/"
-                    + (currentdate.getMonth()+1)  + "/" 
-                    + currentdate.getFullYear() + " @ "  
-                    + currentdate.getHours() + ":"  
-                    + currentdate.getMinutes() + ":" 
-                    + currentdate.getSeconds(); 
-
-
-                    var currentYear = currentdate.getFullYear()
-                    var currentMonth = currentdate.getMonth()+1
-                    var currentDay = currentdate.getDate()
-
-                    %>
-                    <p> <%= datetime %> </p>
                     
-
-                    <form action="/admin/income" method="post" onsubmit="return onDateSubmit()">
-                        <td>Year:</td>
-                        <td><input type="number" name="select_year" id="select_year" min="1950" max=2100 /></td>
-                        <td>Month:</td>
-                        <td><input type="number" name="select_month" id="select_month" min="1" max=12 /></td>
-                        <td>Day:</td>
-                        <td><input type="number" name="select_day" id="select_day" min="1" max=31 /></td>
-                        <td> ~ </td>
-                        <td>Year:</td>
-                        <td><input type="number" name="select_year_a" id="select_year_a" min="1950" max=2100 /></td>
-                        <td>Month:</td>
-                        <td><input type="number" name="select_month_a" id="select_month_a" min="1" max=12 /></td>
-                        <td>Day:</td>
-                        <td><input type="number" name="select_day_a" id="select_day_a" min="1" max=31 /></td>
-                        <td><button class="my-btn my-btn-icon my-btn--blue" type="submit">확인</button></td>
-                    </form>
-
-
 
 
                     <div class="table-responsive table--no-card m-b-40">
@@ -166,55 +130,6 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script>
-    function onDateSubmit() {
-        if ( $("#select_year").val().trim() == "" ) {
-            var message = "year를 입력해주세요.";
-            $("#select_year").val("");
-            $("#select_year").focus();
-            alert(message);
-            return false;
-        }
-        if ( $("#select_month").val().trim() == "" ) {
-            var message = "month를 입력해 주세요.";
-            $("#select_month").val("");
-            $("#select_month").focus();
-            alert(message);
-            return false;
-        }
-        if ( $("#select_day").val().trim() == "" ) {
-            var message = "day를 입력해 주세요.";
-            $("#select_day").val("");
-            $("#select_day").focus();
-            alert(message);
-            return false;
-        }
-
-
-        if ( $("#select_year_a").val().trim() == "" ) {
-            var message = "year를 입력해주세요.";
-            $("#select_year_a").val("");
-            $("#select_year_a").focus();
-            alert(message);
-            return false;
-        }
-        if ( $("#select_month_a").val().trim() == "" ) {
-            var message = "month를 입력해 주세요.";
-            $("#select_month_a").val("");
-            $("#select_month_a").focus();
-            alert(message);
-            return false;
-        }
-        if ( $("#select_day_a").val().trim() == "" ) {
-            var message = "day를 입력해 주세요.";
-            $("#select_day_a").val("");
-            $("#select_day_a").focus();
-            alert(message);
-            return false;
-        }
-  }
-</script>
-
 
 </body>
 
