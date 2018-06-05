@@ -334,9 +334,4 @@ router.get('/income_range', function(req,res,next) {
   });
 });
 
-/* GET /admin/login */
-router.get('/questions', function(req, res, next) {
-  res.render('questions', { title: 'questions' });
-});
-
 module.exports = router;
