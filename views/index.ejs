@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home | PineApple</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/css/price-range.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+   <link href="/css/main.css" rel="stylesheet">
+   <link href="/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
+   <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+   <script>
+
+  </script>
+</head><!--/head-->
+
+<body>
+   <header id="header"><!--header-->
+      <div class="header-middle"><!--header-middle-->
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-4">
+                  <div class="logo pull-left">
+                     <a href="/"><img src="/images/home/logo.png" alt="" /></a>
+                  </div>
+                  <div class="btn-group pull-right">
+                  </div>
+               </div>
+               <div class="col-sm-8">
+                  <div class="shop-menu pull-right">
+                     <ul class="nav navbar-nav">
+                        <li><a href="/cart"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+                        <li><a href="/buy_history"><i class="fa fa-star"></i> 구매내역</a></li>
+                        <% if(session){%>
+                                                  <li><a href='/logout'><i class="fa fa-lock"></i> 로그아웃</a></li>
+                                                  <%}else{%>
+                                                    <li><a href='/login'><i class="fa fa-lock"></i> 로그인</a></li>
+                                                    <%}%>                <li><a href='/join'><i class="fa fa-user"></i> 회원가입</a></li>
+                <li><a href="/admin"><i class="fa fa-crosshairs"></i> 관리자</a></li>
+
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div><!--/header-middle-->
+   </header><!--/header-->
+
+   <section id="slider"><!--slider-->
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-12">
+               <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                     <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                     <li data-target="#slider-carousel" data-slide-to="1"></li>
+                     <li data-target="#slider-carousel" data-slide-to="2"></li>
+                  </ol>
+
+                  <div class="carousel-inner">
+                     <div class="item active">
+                        <div class="col-sm-6">
+                           <h1>SONY</h1>
+                           <p>음악과 함께 사라지다.음악과 함께 채워지다. </p>
+                        </div>
+                        <div class="col-sm-6">
+                           <img src="/images/home/100.png" class="girl img-responsive" alt="" />
+                        </div>
+                     </div>
+                     <div class="item">
+                        <div class="col-sm-6">
+                          <h1>SONY</h1>
+                          <p>음악과 함께 사라지다.음악과 함께 채워지다. </p>
+                        </div>
+                        <div class="col-sm-6">
+                           <img src="/images/home/99.png" class="girl img-responsive" alt="" />
+                        </div>
+                     </div>
+
+                     <div class="item">
+                        <div class="col-sm-6">
+                          <h1>SONY</h1>
+                          <p>음악과 함께 사라지다.음악과 함께 채워지다. </p>
+                        </div>
+                        <div class="col-sm-6">
+                           <img src="/images/home/98.png" class="girl img-responsive" alt="" />
+                        </div>
+                     </div>
+
+                  </div>
+
+                  <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                     <i class="fa fa-angle-left"></i>
+                  </a>
+                  <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                     <i class="fa fa-angle-right"></i>
+                  </a>
+               </div>
+
+            </div>
+         </div>
+      </div>
+   </section><!--/slider-->
+
+   <section>
+      <div class="container">
+         <div class="row">
+
+               <div class="category-tab"><!--category-tab-->
+                  <div class="col-sm-12">
+                     <ul class="nav nav-tabs">
+                        <li class="active"><a href="#전체상품" data-toggle="tab">전체상품</a></li>
+                        <li><a href="#키보드" data-toggle="tab">키보드</a></li>
+                        <li><a href="#마우스" data-toggle="tab">마우스</a></li>
+                        <li><a href="#스피커" data-toggle="tab">스피커</a></li>
+                        <li><a href="#파우치" data-toggle="tab">파우치</a></li>
+                        <li><a href="#저장장치" data-toggle="tab">저장장치</a></li>
+                     </ul>
+                  </div>
+
+                  <div class="tab-content">
+                    <div class="tab-pane fade active in" id="전체상품" >
+               <%
+                 for(var i=0; i<rows.length;i++)
+                 {
+                   var oneItem=rows[i];
+                   %>
+                     <div class="col-sm-3">
+                                <div class="product-image-wrapper">
+                                   <div class="single-products">
+                                      <div class="productinfo text-center">
+                                         <img src='/image/<%=oneItem.item_image%>' width='343px' height="343px" alt="" />
+                                         <h2 id="temp"><%=(oneItem.item_price).toLocaleString()%></h2>
+                                         <p><%=oneItem.item_name%></p>
+                                         <a href='/product_detail/<%=oneItem.item_name%>' class="btn btn-default product-detail" ><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                      </div>
+
+                                   </div>
+                                </div>
+                             </div>
+                   <%
+                 }%>
+                       </div>
+                     <div class="tab-pane fade" id="키보드" >
+                <%
+                  for(var i=0; i<rows.length;i++)
+                  {
+                    var oneItem=rows[i];
+               if(oneItem.item_category=="키보드")
+                    {%>
+                      <div class="col-sm-3">
+                                 <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                       <div class="productinfo text-center">
+                                         <img src='/image/<%=oneItem.item_image%>' width='343px' height="343px" alt="" />
+                                         <h2 id="temp"><%=(oneItem.item_price).toLocaleString()%></h2>
+                                         <p><%=oneItem.item_name%></p>
+                                          <a href='/product_detail/<%=oneItem.item_name%>' class="btn btn-default product-detail" ><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                       </div>
+
+                                    </div>
+                                 </div>
+                              </div>
+                    <%}
+                  }%>
+                        </div>
+                <div class="tab-pane fade" id="마우스" >
+                  <%
+                    for(var i=0; i<rows.length;i++)
+                    {
+                      var oneItem=rows[i];
+                      if(oneItem.item_category=="마우스")
+                      {%>
+                        <div class="col-sm-3">
+                                   <div class="product-image-wrapper">
+                                      <div class="single-products">
+                                         <div class="productinfo text-center">
+                                           <img src='/image/<%=oneItem.item_image%>' width='343px' height="343px" alt="" />
+                                           <h2 id="temp"><%=(oneItem.item_price).toLocaleString()%></h2>
+                                           <p><%=oneItem.item_name%></p>
+                                            <a href='/product_detail/<%=oneItem.item_name%>' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                         </div>
+
+                                      </div>
+                                   </div>
+                                </div>
+                      <%}
+                    }%>
+                          </div>
+                  <div class="tab-pane fade" id="스피커" >
+                    <%
+                      for(var i=0; i<rows.length;i++)
+                      {
+                        var oneItem=rows[i];
+                        if(oneItem.item_category == "스피커")
+                        {%>
+                          <div class="col-sm-3">
+                                     <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                           <div class="productinfo text-center">
+                                             <img src='/image/<%=oneItem.item_image%>' width='343px' height="343px"alt="" />
+                                             <h2 id="temp"><%=(oneItem.item_price).toLocaleString()%></h2>
+                                             <p><%=oneItem.item_name%></p>
+                                              <a href='/product_detail/<%=oneItem.item_name%>' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                           </div>
+
+                                        </div>
+                                     </div>
+                                  </div>
+                        <%}
+                      }%>
+                            </div>
+                    <div class="tab-pane fade" id="파우치" >
+                      <%
+                        for(var i=0; i<rows.length;i++)
+                        {
+                          var oneItem=rows[i];
+                          if(oneItem.item_category=="파우치")
+                          {%>
+                            <div class="col-sm-3">
+                                       <div class="product-image-wrapper">
+                                          <div class="single-products">
+                                             <div class="productinfo text-center">
+                                               <img src='/image/<%=oneItem.item_image%>' width='343px' height="343px"alt="" />
+                                               <h2 id="temp"><%=(oneItem.item_price).toLocaleString()%></h2>
+                                               <p><%=oneItem.item_name%></p>
+                                                <a href='/product_detail/<%=oneItem.item_name%>' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                             </div>
+
+                                          </div>
+                                       </div>
+                                    </div>
+                          <%}
+                  }%>
+               </div>
+                        <div class="tab-pane fade" id="저장장치" >
+                          <%
+                            for(var i=0; i<rows.length;i++)
+                            {
+                              var oneItem=rows[i];
+                              if(oneItem.item_category=="저장장치")
+                              {%>
+                                <div class="col-sm-3">
+                                           <div class="product-image-wrapper">
+                                              <div class="single-products">
+                                                 <div class="productinfo text-center">
+                                                   <img src='/image/<%=oneItem.item_image%>' width='343px' height="343px"alt="" />
+                                                   <h2 id="temp"><%=(oneItem.item_price).toLocaleString()%></h2>
+                                                   <p><%=oneItem.item_name%></p>
+                                                    <a href='/product_detail/<%=oneItem.item_name%>' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                                 </div>
+
+                                              </div>
+                                           </div>
+                                        </div>
+                              <%}
+                            }%>
+                                  </div>
+                              </div>
+                  </div>
+               </div><!--/category-tab-->
+
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <footer id="footer"><!--Footer-->
+      <div class="footer-top">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-2">
+                  <div class="companyinfo">
+                     <h2><span>Pine</span>Apple</h2>
+                     <p>We are computer engineering team from Korea. Thank You</p>
+                  </div>
+               </div>
+               <div class="col-sm-7">
+                  <div class="col-sm-3">
+                     <div class="video-gallery text-center">
+                        <a href="#">
+                          <div class="iframe-img">
+                             <img src="/images/home/iframe1.png" alt="" />
+                          </div>
+                           <div class="overlay-icon">
+
+                              <i class="fa fa-play-circle-o"></i>
+                           </div>
+                        </a>
+                        <p>2013722015</p>
+                        <h2>Eon Seok Yim</h2>
+                     </div>
+                  </div>
+
+                  <div class="col-sm-3">
+                     <div class="video-gallery text-center">
+                        <a href="#">
+                          <div class="iframe-img">
+                             <img src="/images/home/iframe2.png" alt="" />
+                          </div>
+                           <div class="overlay-icon">
+                              <i class="fa fa-play-circle-o"></i>
+                           </div>
+                        </a>
+                        <p>2013722051</p>
+                        <h2>Gi Myeong Lee</h2>
+                     </div>
+                  </div>
+
+                  <div class="col-sm-3">
+                     <div class="video-gallery text-center">
+                        <a href="#">
+                          <div class="iframe-img">
+                             <img src="/images/home/iframe3.png" alt="" />
+                          </div>
+                           <div class="overlay-icon">
+                              <i class="fa fa-play-circle-o"></i>
+                           </div>
+                        </a>
+                        <p>2013722047</p>
+                        <h2>Hee Seung Kang</h2>
+                     </div>
+                  </div>
+
+                  <div class="col-sm-3">
+                     <div class="video-gallery text-center">
+                        <a href="#">
+                           <div class="iframe-img">
+                              <img src="/images/home/iframe4.png" alt="" />
+                           </div>
+                           <div class="overlay-icon">
+                              <i class="fa fa-play-circle-o"></i>
+                           </div>
+                        </a>
+                        <p>20127268</p>
+                        <h2>Byung Min Lee</h2>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-3">
+                  <div class="address">
+                     <img src="/images/home/map.png" alt="" />
+                     <p>Korea, KangWoon  University</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="footer-bottom">
+         <div class="container">
+            <div class="row">
+               <p class="pull-left">Copyright © 2018 PineApple Inc. All rights reserved.</p>
+               <p class="pull-right">Designed by <span><a target="_blank" href="">eonseok</a></span></p>
+            </div>
+         </div>
+      </div>
+
+   </footer><!—/Footer—>
+
+
+
+    <script src="/js/jquery.js"></script>
+   <script src="/js/bootstrap.min.js"></script>
+   <script src="/js/jquery.scrollUp.min.js"></script>
+   <script src="/js/price-range.js"></script>
+    <script src="/js/jquery.prettyPhoto.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
