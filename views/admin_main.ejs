@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 화면</title>
+    <!-- Fontfaces CSS-->
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- Vendor CSS-->
+    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link href="/css/theme.css" rel="stylesheet" media="all">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        /*$(document).ready(function(){
+
+          var keyboard = $('#keyboard').text();
+          var mouse = $('#mouse').text();
+          var speaker = $('#speaker').text();
+          var pouch = $('#pouch').text();
+          var usb = $('#usb').text();
+      }*/
+        var keyboard = +document.getElementById("keyboard").innerHTML;
+        var mouse = +document.getElementById("mouse").innerHTML;
+        var speaker = +document.getElementById("speaker").innerHTML;
+        var pouch = +document.getElementById("pouch").innerHTML;
+        var usb = +document.getElementById("usb").innerHTML;
+
+        var data = google.visualization.arrayToDataTable([
+            ['item', 'total sales'],
+            ['키보드', keyboard],
+            ['마우스', mouse],
+            ['스피커', speaker],
+            ['파우치', pouch],
+            ['저장장치', usb]
+        ]);
+
+        var options = {
+            title: ''
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+    </script>
+</head>
+
+<body>
+    <!-- 상단 네비게이션 바 -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- 브라우저가 좁아졋을때 나오는 버튼(클릭시 메뉴출력) -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">관리자화면</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"> <a href="/admin/main">메인</a></li>
+                    <li><a href="/admin/addItem">물품 추가</a></li>
+                    <li><a href="/admin/list">물품 관리</a></li>
+                    <li><a href="/admin/buyProduct">구매 현황</a></li>
+                    <li><a href="/admin/income">매출 현황</a></li>
+                    <li><a href="/admin/questions">질문 & 답변</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="overview-wrap">
+                                <h2 class="title-1">메인 화면</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-t-25">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="overview-item overview-item--c1">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-account-o"></i>
+                                        </div>
+                                        <div class="text">
+                                            <% var user_num = row.length; %>
+                                                <h2><%=user_num%></h2>
+                                                <span>members online</span>
+                                        </div>
+                                    </div>
+                                    <div class="overview-chart">
+                                        <canvas id="widgetChart1"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="overview-item overview-item--c2">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-shopping-cart"></i>
+                                        </div>
+                                        <div class="text">
+                                            <%
+                                            var keyboard=0;
+                                            var mouse=0;
+                                            var speaker=0;
+                                            var pouch=0;
+                                            var usb=0;
+                                            var total_earning=0;
+                                            var total_earn=0;
+                                            var month=new Date();
+                                            var monthly=0;
+                                            for(i=0; i<rows.length; i++)
+                                            {
+                                                var cart_item = rows[i];
+                                                var total_cart=rows.length;
+                                                if(cart_item.item_buy==1)
+                                                {
+                                                    if(cart_item.item_category=='키보드')
+                                                        keyboard+=cart_item.user_stock;
+                                                    if(cart_item.item_category=='마우스')
+                                                        mouse+=cart_item.user_stock;
+                                                    if(cart_item.item_category=='스피커')
+                                                        speaker+=cart_item.user_stock;
+                                                    if(cart_item.item_category=='파우치')
+                                                        pouch+=cart_item.user_stock;
+                                                    if(cart_item.item_category=='저장장치')
+                                                        usb+=cart_item.user_stock;
+													if(month.getMonth()==cart_item.item_date.getMonth())
+														monthly+=cart_item.user_stock;
+
+                                                    total_earn+=(cart_item.item_price*cart_item.user_stock);
+                                                }
+                                            }
+                                            %>
+                                                <h2><%=total_cart%></h2>
+                                                <span>cart & sold</span>
+                                        </div>
+                                    </div>
+                                    <div class="overview-chart">
+                                        <canvas id="widgetChart2"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="overview-item overview-item--c3">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-calendar-note"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2><%=monthly%></h2>
+                                            <span>monthly sold</span>
+                                        </div>
+                                    </div>
+                                    <div class="overview-chart">
+                                        <canvas id="widgetChart3"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="overview-item overview-item--c4">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-money"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2><%total_earning=total_earn.toLocaleString()%>
+                                                <%=total_earning%>
+                                            </h2>
+                                            <span>total earnings</span>
+                                        </div>
+                                    </div>
+                                    <div class="overview-chart">
+                                        <canvas id="widgetChart4"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color:white" id=keyboard>
+                        <%=keyboard%>
+                    </p>
+                    <p style="color:white" id=mouse>
+                        <%=mouse%>
+                    </p>
+                    <p style="color:white" id=speaker>
+                        <%=speaker%>
+                    </p>
+                    <p style="color:white" id=pouch>
+                        <%=pouch%>
+                    </p>
+                    <p style="color:white" id=usb>
+                        <%=usb%>
+                    </p>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="au-card recent-report">
+                                <div class="au-card-inner">
+                                    <h3 class="title-2">Total sales percent</h3>
+                                    <div class="recent-report__chart">
+                                        <div id="piechart" style="width: 1000px; height: 500px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
