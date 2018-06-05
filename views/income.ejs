@@ -77,7 +77,7 @@
                     <p> <%= datetime %> </p>
                     
 
-                    <form action="/admin/income/1" method="post" onsubmit="return onDateSubmit()">
+                    <form action="/admin/income_range" method="get" onsubmit="return onDateSubmit()">
                         <td>Year:</td>
                         <td><input type="number" name="select_year" id="select_year" min="1950" max=2100 /></td>
                         <td>Month:</td>
@@ -95,12 +95,12 @@
                     </form>
 
 
-
-
                     <div class="table-responsive table--no-card m-b-40">
                         <table class="table table-borderless table-striped table-earning">
                             <thead>
-                                <tr>
+           
+
+                     <tr>
                                     <th>날짜.시간</th>
                                     <th>회원번호</th>
                                     <th>수량</th>
