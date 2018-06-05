@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Product Details | E-Shopper</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/css/price-range.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+	<link href="/css/main.css" rel="stylesheet">
+	<link href="/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script type="text/javascript">
+          $(document).ready(function(){
+              $('#a').on('click',function(){
+
+          var name = $(this).siblings('span').text();
+          var price = $('#b').text();
+          var category= $('#c').text();
+          var image = $('#d').text();
+          $.ajax({
+                      url:'/product_detail/'+name,
+                      type:'post',
+                       data:{ name : name,
+                              price : price,
+                              category : category,
+                              image : image
+                              },
+                      success : function(data){console.log("요청 성공시 호출"); alert("장바구니 성공!");},
+                      error : function(data) {console.log("실패시 호출")}
+                  });
+              });
+          });
+      </script>
+</head><!--/head-->
+
+<body>
+	<header id="header"><!--header-->
+
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="/"><img src="/images/home/logo.png" alt="" /></a>
+						</div>
+						<div class="btn-group pull-right">
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+                <li><a href="/cart"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+                <li><a href="/buy_history"><i class="fa fa-star"></i> 구매내역</a></li>
+                <% if(session){%>
+                                          <li><a href='/logout'><i class="fa fa-lock"></i> 로그아웃</a></li>
+                                          <%}else{%>
+                                            <li><a href='/login'><i class="fa fa-lock"></i> 로그인</a></li>
+                                            <%}%>                <li><a href='/join'><i class="fa fa-user"></i> 회원가입</a></li>
+        <li><a href="/admin"><i class="fa fa-crosshairs"></i> 관리자</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+
+	</header><!--/header-->
+
+	<section>
+		<div class="container">
+			<div class="row">
+
+				<div class="col-sm-9 padding-right">
+					<div class="product-details"><!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+                <img src='/image/<%=rows[0].item_image%>' alt="" />
+								<h3>ZOOM</h3>
+							</div>
+							<div id="similar-product" class="carousel slide" data-ride="carousel">
+
+								  <!-- Wrapper for slides -->
+
+
+								  <!-- Controls -->
+								  <a class="left item-control" href="#similar-product" data-slide="prev">
+									<i class="fa fa-angle-left"></i>
+								  </a>
+								  <a class="right item-control" href="#similar-product" data-slide="next">
+									<i class="fa fa-angle-right"></i>
+								  </a>
+							</div>
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information"><!--/product-information-->
+								<img src="/images/product-details/new.jpg" class="newarrival" alt="" />
+								<h2></h2>
+								<span>
+									<span id=item_name name="item_name"><%= rows[0].item_name %></span>
+                  <a class="btn btn-default product-detail" id='a' ><i class="fa fa-shopping-cart"></i>Add to cart</a>
+								</span>
+								<p>Price: $ <b id='b'><%= rows[0].item_price%></b></p>
+								<p>Category: <b id='c'><%= rows[0].item_category %></b></p>
+                <p><b id='d' style="color:white"><%= rows[0].item_image %></b></p>
+							</div><!--/product-information-->
+						</div>
+					</div><!--/product-details-->
+					<div class="category-tab shop-details-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+								<li><a href="#tag" data-toggle="tab">Recommend Item</a></li>
+								<li ><a href="#reviews" data-toggle="tab">Reviews</a></li>
+							</ul>
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane fade active in" id="details" >
+								<img src='/image/<%=rows[0].item_detail_image%>'width='800px' alt="" />
+							</div>
+
+							<div class="tab-pane fade" id="tag" >
+                <% for(var i=0; i<rows2.length; i++)
+                                           {
+                                              var oneItem = rows2[i]; %>
+                                        <div class="col-sm-3">
+                                           <div class="product-image-wrapper">
+                                              <div class="single-products">
+                                                 <div class="productinfo text-center">
+                                                    <img src='/image/<%=oneItem.item_image%>' alt="" />
+                                                    <h2>$<%=oneItem.item_price%></h2>
+                                                    <p><%=oneItem.item_name%></p>
+                                                    <a href='/product_detail/<%=oneItem.item_name%>'  class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                                 </div>
+                                              </div>
+                                           </div>
+                                        </div>
+                                        <%}%>
+
+              </div>
+
+							<div class="tab-pane fade" id="reviews" >
+								<div class="col-sm-12">
+                  <% for(var i=0;i<rows3.length;i++)
+                  {
+                    var a=rows3[i];%>
+									<ul>
+										<li><a href=""><i class="fa fa-user"></i><%=a.user_name%></a></li>
+										<li><a href=""><i class="fa fa-star"></i><%=a.item_grade%></a></li>
+									</ul>
+									<h3><%=a.item_review %></h3>
+                  <%}%>
+									<p><b>Write Your Review</b></p>
+
+                  <form action="/review" method="get">
+                              <span>
+                                 <input type="text" name="user_name" placeholder="Your Name"/>
+                                 <input type="hidden" name="item_name" value="<%=rows[0].item_name%>">
+                              </span>
+
+                              <textarea name="item_review" ></textarea>
+                              <b>평점 몇점? : </b> <select type="hidden" name='item_grade' id='item_grade' style="width:40px;"value="<%=oneItem.item_grade%>">
+                                              <option value="1">1</option>
+                                              <option value="2">2</option>
+                                              <option value="3">3</option>
+                                              <option value="4">4</option>
+                                              <option value="5">5</option>
+                                            </select>
+                              <button type="submit" class="btn btn-default pull-right">
+                                 Submit
+                              </button>
+                           </form>
+								</div>
+							</div>
+						</div>
+					</div><!--/category-tab-->
+				</div>
+			</div>
+		</div>
+	</section>
+
+  <footer id="footer"><!--Footer-->
+     <div class="footer-top">
+        <div class="container">
+           <div class="row">
+              <div class="col-sm-2">
+                 <div class="companyinfo">
+                    <h2><span>Pine</span>Apple</h2>
+                    <p>We are computer engineering team from Korea. Thank You</p>
+                 </div>
+              </div>
+              <div class="col-sm-7">
+                 <div class="col-sm-3">
+                    <div class="video-gallery text-center">
+                       <a href="#">
+                         <div class="iframe-img">
+                            <img src="/images/home/iframe1.png" alt="" />
+                         </div>
+                          <div class="overlay-icon">
+
+                             <i class="fa fa-play-circle-o"></i>
+                          </div>
+                       </a>
+                       <p>2013722015</p>
+                       <h2>Eon Seok Yim</h2>
+                    </div>
+                 </div>
+
+                 <div class="col-sm-3">
+                    <div class="video-gallery text-center">
+                       <a href="#">
+                         <div class="iframe-img">
+                            <img src="/images/home/iframe2.png" alt="" />
+                         </div>
+                          <div class="overlay-icon">
+                             <i class="fa fa-play-circle-o"></i>
+                          </div>
+                       </a>
+                       <p>2013722051</p>
+                       <h2>Gi Myeong Lee</h2>
+                    </div>
+                 </div>
+
+                 <div class="col-sm-3">
+                    <div class="video-gallery text-center">
+                       <a href="#">
+                         <div class="iframe-img">
+                            <img src="/images/home/iframe3.png" alt="" />
+                         </div>
+                          <div class="overlay-icon">
+                             <i class="fa fa-play-circle-o"></i>
+                          </div>
+                       </a>
+                       <p>2013722047</p>
+                       <h2>Hee Seung Kang</h2>
+                    </div>
+                 </div>
+
+                 <div class="col-sm-3">
+                    <div class="video-gallery text-center">
+                       <a href="#">
+                          <div class="iframe-img">
+                             <img src="/images/home/iframe4.png" alt="" />
+                          </div>
+                          <div class="overlay-icon">
+                             <i class="fa fa-play-circle-o"></i>
+                          </div>
+                       </a>
+                       <p>20127268</p>
+                       <h2>Byung Min Lee</h2>
+                    </div>
+                 </div>
+              </div>
+              <div class="col-sm-3">
+                 <div class="address">
+                    <img src="/images/home/map.png" alt="" />
+                    <p>Korea, KangWoon  University</p>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+
+     <div class="footer-bottom">
+        <div class="container">
+           <div class="row">
+              <p class="pull-left">Copyright © 2018 PineApple Inc. All rights reserved.</p>
+              <p class="pull-right">Designed by <span><a target="_blank" href="">eonseok</a></span></p>
+           </div>
+        </div>
+     </div>
+
+  </footer><!—/Footer—>
+
+    <script src="/js/jquery.js"></script>
+	<script src="/js/price-range.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.prettyPhoto.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
