@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cart | E-Shopper</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/price-range.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+   <link href="css/main.css" rel="stylesheet">
+   <link href="css/responsive.css" rel="stylesheet">
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+   <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+   <script type="text/javascript">
+
+      $(document).ready(function(){
+         $(".cart_quantity_input").change( function() {
+               var quantity = $(this).val();
+               var price = $(this).parent().parent().siblings('.cart_price').children().text();
+               $(this).parent().parent().siblings('.cart_total').children().html("$"+quantity*price);
+
+               $.ajax({
+                  url:'/user_stock_update',
+                  type:'post',
+                  data : {stock : $(this).val(),
+                     name : $(this).parent().parent().siblings('.cart_name').children().text()
+                  }
+               });
+            });
+      });
+   </script>
+</head><!--/head-->
+
+<body>
+   <header id="header"><!--header-->
+      <div class="header-middle"><!--header-middle-->
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-4">
+                  <div class="logo pull-left">
+                     <a href="/"><img src="images/home/logo.png" alt="" /></a>
+                  </div>
+               </div>
+               <div class="col-sm-8">
+                  <div class="shop-menu pull-right">
+                     <ul class="nav navbar-nav">
+                        <li><a href="/cart"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+                        <li><a href="/buy_history"><i class="fa fa-star"></i> 구매내역</a></li>
+                        <li><a href="/logout" class="active"><i class="fa fa-lock"></i> 로그아웃</a></li>
+                               <li><a href="/join"><i class="fa fa-user"></i> 회원가입</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div><!--/header-middle-->
+
+   </header><!--/header-->
+
+   <section id="cart_items">
+      <div class="container">
+         <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+               <thead>
+                  <tr class="cart_menu">
+                     <td class="image">Item</td>
+                     <td class="name">name</td>
+                     <td class="category">category</td>
+                     <td class="price">Price</td>
+                     <td class="quantity">Quantity</td>
+                     <td class="total">Total</td>
+                     <td></td>
+                  </tr>
+               </thead>
+               <tbody>
+                  <%
+                     for(var i=0; i<rows.length; i++)
+                     {
+                        var oneItem=rows[i]; %>
+                        <tr>
+                              <td class="cart_product">
+                                 <a href=""><img src='/image/<%=oneItem.item_image%>'  width="208px" height="183px"  alt=""></a>
+                              </td>
+                              <td class="cart_name">
+                                 <h4><b><%=oneItem.item_name%></b></h4>
+                              </td>
+                              <td class="cart_category">
+                                 <h4><%=oneItem.item_category%></h4>
+                              </td>
+                              <td class="cart_price">
+                                 <h4><%=oneItem.item_price%></h4>
+                              </td>
+
+                              <td class="cart_quantity">
+                                 <div class="cart_quantity_button">
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="0" autocomplete="off" size="2" >
+                                 </div>
+                              </td>
+                              <td class="cart_total">
+                                 <p class="cart_total_price">$0</p>
+                              </td>
+                              <td class="cart_delete">
+                                 <a class="cart_quantity_delete" href="/cart_delete/<%=oneItem.item_name%>"><i class="fa fa-times"></i></a>
+                              </td>
+                           </tr>
+                     <%}%>
+               </tbody>
+            </table>
+         </div>
+         <a href='/buy' class="btn btn-default buy"  style="float: right;">구매하기</a>
+   </div>
+   </section> <!--/#cart_items-->
+
+
+    <script src="js/jquery.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

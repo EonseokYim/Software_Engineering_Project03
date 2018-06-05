@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home | E-Shopper</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/css/price-range.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+   <link href="/css/main.css" rel="stylesheet">
+   <link href="/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
+   <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+   <script>
+      $(document).ready(function(){
+          $('.product-detail').on('click',function(){
+
+      var name = $(this).siblings('p').text();
+      $.ajax({
+                  url:'/product_detail',
+                  type:'post',
+                   data:{ name : name},
+                  success:function(data){ },
+                  error : function(data) {}
+
+              });
+          });
+      });
+  </script>
+</head><!--/head-->
+
+<body>
+   <header id="header"><!--header-->
+      <div class="header-middle"><!--header-middle-->
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-4">
+                  <div class="logo pull-left">
+                     <a href="index.html"><img src="/images/home/logo.png" alt="" /></a>
+                  </div>
+                  <div class="btn-group pull-right">
+                  </div>
+               </div>
+               <div class="col-sm-8">
+                  <div class="shop-menu pull-right">
+                     <ul class="nav navbar-nav">
+                        <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+                        <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+                        <li><a href="/cart"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+                        <li><a href='/login'><i class="fa fa-lock"></i> 로그인</a></li>
+                <li><a href='/join'><i class="fa fa-user"></i> 회원가입</a></li>
+                <li><a href="/admin"><i class="fa fa-crosshairs"></i> 관리자</a></li>
+
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div><!--/header-middle-->
+
+      <div class="header-bottom"><!--header-bottom-->
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-9">
+                  <div class="navbar-header">
+                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                     </button>
+                  </div>
+                  <div class="mainmenu pull-left">
+                     <ul class="nav navbar-nav collapse navbar-collapse">
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="shop.html">Products</a></li>
+                              <li><a href="product-details.html">Product Details</a></li>
+                              <li><a href="checkout.html">Checkout</a></li>
+                              <li><a href="cart.html">Cart</a></li>
+                              <li><a href='/login'>Login</a></li>
+                                    </ul>
+                                </li>
+                        <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="blog.html">Blog List</a></li>
+                              <li><a href="blog-single.html">Blog Single</a></li>
+                                    </ul>
+                                </li>
+                        <li><a href="404.html">404</a></li>
+                        <li><a href="contact-us.html">Contact</a></li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="col-sm-3">
+               </div>
+            </div>
+         </div>
+      </div><!--/header-bottom-->
+   </header><!--/header-->
+
+   <section id="slider"><!--slider-->
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-12">
+               <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                     <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                     <li data-target="#slider-carousel" data-slide-to="1"></li>
+                     <li data-target="#slider-carousel" data-slide-to="2"></li>
+                  </ol>
+
+                  <div class="carousel-inner">
+                     <div class="item active">
+                        <div class="col-sm-6">
+                           <h1><span>E</span>-SHOPPER</h1>
+                           <h2>Free E-Commerce Template</h2>
+                           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                           <button type="button" class="btn btn-default get">Get it now</button>
+                        </div>
+                        <div class="col-sm-6">
+                           <img src="/images/home/girl1.jpg" class="girl img-responsive" alt="" />
+                           <img src="/images/home/pricing.png"  class="pricing" alt="" />
+                        </div>
+                     </div>
+                     <div class="item">
+                        <div class="col-sm-6">
+                           <h1><span>E</span>-SHOPPER</h1>
+                           <h2>100% Responsive Design</h2>
+                           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                           <button type="button" class="btn btn-default get">Get it now</button>
+                        </div>
+                        <div class="col-sm-6">
+                           <img src="/images/home/girl2.jpg" class="girl img-responsive" alt="" />
+                           <img src="/images/home/pricing.png"  class="pricing" alt="" />
+                        </div>
+                     </div>
+
+                     <div class="item">
+                        <div class="col-sm-6">
+                           <h1><span>E</span>-SHOPPER</h1>
+                           <h2>Free Ecommerce Template</h2>
+                           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                           <button type="button" class="btn btn-default get">Get it now</button>
+                        </div>
+                        <div class="col-sm-6">
+                           <img src="/images/home/girl3.jpg" class="girl img-responsive" alt="" />
+                           <img src="/images/home/pricing.png" class="pricing" alt="" />
+                        </div>
+                     </div>
+
+                  </div>
+
+                  <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                     <i class="fa fa-angle-left"></i>
+                  </a>
+                  <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                     <i class="fa fa-angle-right"></i>
+                  </a>
+               </div>
+
+            </div>
+         </div>
+      </div>
+   </section><!--/slider-->
+
+   <section>
+      <div class="container">
+         <div class="row">
+
+               <div class="category-tab"><!--category-tab-->
+                  <div class="col-sm-12">
+                     <ul class="nav nav-tabs">
+                        <li class="active"><a href="#키보드" data-toggle="tab">키보드</a></li>
+                        <li><a href="#마우스" data-toggle="tab">마우스</a></li>
+                        <li><a href="#스피커" data-toggle="tab">스피커</a></li>
+                        <li><a href="#파우치" data-toggle="tab">파우치</a></li>
+                        <li><a href="#저장장치" data-toggle="tab">저장장치</a></li>
+                     </ul>
+                  </div>
+
+                  <div class="tab-content">
+                     <div class="tab-pane fade active in" id="키보드" >
+                <%
+                  for(var i=0; i<rows.length;i++)
+                  {
+                    var oneItem=rows[i];
+               if(oneItem.item_category=="키보드")
+                    {%>
+                      <div class="col-sm-3">
+                                 <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                       <div class="productinfo text-center">
+                                          <img src="/images/home/gallery1.jpg" alt="" />
+                                          <h2 id="temp"><%=oneItem.item_price%></h2>
+                                          <p><%=oneItem.item_name%></p>
+                                          <a href='/product_detail' class="btn btn-default product-detail" ><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                       </div>
+
+                                    </div>
+                                 </div>
+                              </div>
+                    <%}
+                  }%>
+                        </div>
+                <div class="tab-pane fade" id="마우스" >
+                  <%
+                    for(var i=0; i<rows.length;i++)
+                    {
+                      var oneItem=rows[i];
+                      if(oneItem.item_category=="마우스")
+                      {%>
+                        <div class="col-sm-3">
+                                   <div class="product-image-wrapper">
+                                      <div class="single-products">
+                                         <div class="productinfo text-center">
+                                            <img src="/images/home/gallery1.jpg" alt="" />
+                                            <h2><%=oneItem.item_price%></h2>
+                                            <p><%=oneItem.item_name%></p>
+                                            <a href='/product_detail' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                         </div>
+
+                                      </div>
+                                   </div>
+                                </div>
+                      <%}
+                    }%>
+                          </div>
+                  <div class="tab-pane fade" id="스피커" >
+                    <%
+                      for(var i=0; i<rows.length;i++)
+                      {
+                        var oneItem=rows[i];
+                        if(oneItem.item_category == "스피커")
+                        {%>
+                          <div class="col-sm-3">
+                                     <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                           <div class="productinfo text-center">
+                                              <img src="/images/home/gallery1.jpg" alt="" />
+                                              <h2><%=oneItem.item_price%></h2>
+                                              <p><%=oneItem.item_name%></p>
+                                              <a href='/product_detail' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                           </div>
+
+                                        </div>
+                                     </div>
+                                  </div>
+                        <%}
+                      }%>
+                            </div>
+                    <div class="tab-pane fade" id="파우치" >
+                      <%
+                        for(var i=0; i<rows.length;i++)
+                        {
+                          var oneItem=rows[i];
+                          if(oneItem.item_category=="파우치")
+                          {%>
+                            <div class="col-sm-3">
+                                       <div class="product-image-wrapper">
+                                          <div class="single-products">
+                                             <div class="productinfo text-center">
+                                                <img src="/images/home/gallery1.jpg" alt="" />
+                                                <h2><%=oneItem.item_price%></h2>
+                                                <p><%=oneItem.item_name%></p>
+                                                <a href='/product_detail' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                             </div>
+
+                                          </div>
+                                       </div>
+                                    </div>
+                          <%}
+                  }%>
+               </div>
+                        <div class="tab-pane fade" id="저장장치" >
+                          <%
+                            for(var i=0; i<rows.length;i++)
+                            {
+                              var oneItem=rows[i];
+                              if(oneItem.item_category=="저장장치")
+                              {%>
+                                <div class="col-sm-3">
+                                           <div class="product-image-wrapper">
+                                              <div class="single-products">
+                                                 <div class="productinfo text-center">
+                                                    <img src="/images/home/gallery1.jpg" alt="" />
+                                                    <h2><%=oneItem.item_price%></h2>
+                                                    <p><%=oneItem.item_name%></p>
+                                                    <a href='/product_detail' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                                 </div>
+
+                                              </div>
+                                           </div>
+                                        </div>
+                              <%}
+                            }%>
+                                  </div>
+                              </div>
+                  </div>
+               </div><!--/category-tab-->
+
+               <div class="recommended_items"><!--recommended_items-->
+                  <h2 class="title text-center">recommended items</h2>
+
+                  <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                     <div class="carousel-inner">
+                        <div class="item active">
+                           <div class="col-sm-4">
+                              <div class="product-image-wrapper">
+                                 <div class="single-products">
+                                    <div class="productinfo text-center">
+                                       <img src="/images/home/recommend1.jpg" alt="" />
+                                       <h2>$56</h2>
+                                       <p>Easy Polo Black Edition</p>
+                                       <a href='/product_detail' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="product-image-wrapper">
+                                 <div class="single-products">
+                                    <div class="productinfo text-center">
+                                       <img src="/images/home/recommend2.jpg" alt="" />
+                                       <h2>$56</h2>
+                                       <p>Easy Polo Black Edition</p>
+                                       <a href='/product_detail' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="product-image-wrapper">
+                                 <div class="single-products">
+                                    <div class="productinfo text-center">
+                                       <img src="/images/home/recommend3.jpg" alt="" />
+                                       <h2>$56</h2>
+                                       <p>Easy Polo Black Edition</p>
+                                       <a href='/product_detail' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="item">
+                           <div class="col-sm-4">
+                              <div class="product-image-wrapper">
+                                 <div class="single-products">
+                                    <div class="productinfo text-center">
+                                       <img src="/images/home/recommend1.jpg" alt="" />
+                                       <h2>$56</h2>
+                                       <p>Easy Polo Black Edition</p>
+                                       <a href='/product_detail' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="product-image-wrapper">
+                                 <div class="single-products">
+                                    <div class="productinfo text-center">
+                                       <img src="/images/home/recommend2.jpg" alt="" />
+                                       <h2>$56</h2>
+                                       <p>Easy Polo Black Edition</p>
+                                       <a href='/product_detail' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="product-image-wrapper">
+                                 <div class="single-products">
+                                    <div class="productinfo text-center">
+                                       <img src="/images/home/recommend3.jpg" alt="" />
+                                       <h2>$56</h2>
+                                       <p>Easy Polo Black Edition</p>
+                                       <a href='/product_detail' class="btn btn-default product-detail"><i class="fa fa-shopping-cart"></i>상세설명</a>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                      <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                       </a>
+                       <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                       </a>
+                  </div>
+               </div><!--/recommended_items-->
+
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <footer id="footer"><!--Footer-->
+      <div class="footer-top">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-2">
+                  <div class="companyinfo">
+                     <h2><span>e</span>-shopper</h2>
+                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+                  </div>
+               </div>
+               <div class="col-sm-7">
+                  <div class="col-sm-3">
+                     <div class="video-gallery text-center">
+                        <a href="#">
+                           <div class="iframe-img">
+                              <img src="/images/home/iframe1.png" alt="" />
+                           </div>
+                           <div class="overlay-icon">
+                              <i class="fa fa-play-circle-o"></i>
+                           </div>
+                        </a>
+                        <p>Circle of Hands</p>
+                        <h2>24 DEC 2014</h2>
+                     </div>
+                  </div>
+
+                  <div class="col-sm-3">
+                     <div class="video-gallery text-center">
+                        <a href="#">
+                           <div class="iframe-img">
+                              <img src="/images/home/iframe2.png" alt="" />
+                           </div>
+                           <div class="overlay-icon">
+                              <i class="fa fa-play-circle-o"></i>
+                           </div>
+                        </a>
+                        <p>Circle of Hands</p>
+                        <h2>24 DEC 2014</h2>
+                     </div>
+                  </div>
+
+                  <div class="col-sm-3">
+                     <div class="video-gallery text-center">
+                        <a href="#">
+                           <div class="iframe-img">
+                              <img src="/images/home/iframe3.png" alt="" />
+                           </div>
+                           <div class="overlay-icon">
+                              <i class="fa fa-play-circle-o"></i>
+                           </div>
+                        </a>
+                        <p>Circle of Hands</p>
+                        <h2>24 DEC 2014</h2>
+                     </div>
+                  </div>
+
+                  <div class="col-sm-3">
+                     <div class="video-gallery text-center">
+                        <a href="#">
+                           <div class="iframe-img">
+                              <img src="/images/home/iframe4.png" alt="" />
+                           </div>
+                           <div class="overlay-icon">
+                              <i class="fa fa-play-circle-o"></i>
+                           </div>
+                        </a>
+                        <p>Circle of Hands</p>
+                        <h2>24 DEC 2014</h2>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-3">
+                  <div class="address">
+                     <img src="/images/home/map.png" alt="" />
+                     <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="footer-bottom">
+         <div class="container">
+            <div class="row">
+               <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+               <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+            </div>
+         </div>
+      </div>
+
+   </footer><!—/Footer—>
+
+
+
+    <script src="/js/jquery.js"></script>
+   <script src="/js/bootstrap.min.js"></script>
+   <script src="/js/jquery.scrollUp.min.js"></script>
+   <script src="/js/price-range.js"></script>
+    <script src="/js/jquery.prettyPhoto.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
